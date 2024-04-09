@@ -1,0 +1,188 @@
+/*Cabecera*/
+.cabecera__container{
+    display: flex;
+    justify-content: space-between; /* Separación entre elementos */
+    align-items: center;  /* Separación del contenido con los bordes */
+    position: fixed; /* posición fija */
+    top: 0; /* Coordenadas donde va a estar fijo, esto acompaña al position: fixed */
+}
+
+.cabecera__buscar__item{  /*No queremos que aparezca la barra de busqueda en los móviles, por eso lo usamos con @media*/
+    display: none;
+}
+
+/*Menú lateral*/
+.menu__container{
+    position: fixed;
+    bottom: 0%;
+    height: 75px;
+    width: 100%;
+}
+
+.menu__lista{
+    display: flex;
+    justify-content: space-around; /*los elementos se distribuyen uniformemente con el mismo espacio alrededor de ellos*/
+    height: 100%; /*Lo usamos ya que los elementos estan pegados al borde superior de la caja*/
+}
+
+.menu__lista li{
+    /*align-items: center   Pudimos trabajar con esta propiedad pero nos enseñaron la propiedad de abajo*/  
+    align-self: center; /*propiedad específica para los elementos hijos
+    con la que podemos trabajar el alineamiento de los elementos por individual o en conjunto*/
+}
+
+.menu__itens{
+    display: flex;
+    flex-direction: column; /*con esta propiedad logramos que los iconos de la lista esten arriba y el texto abajo*/
+    gap: 5px; /*separamos un poco el icono con el texto*/
+}
+
+.menu__lista:nth-child(2), /*Colocamos esta subclase con las listas de items que no queremos que aparezcan para moviles*/
+.menu__lista:nth-child(3),
+.menu__lista:nth-child(4) {
+    display: none;  /*Con esto ya solo aparecen los items que queremos para moviles*/
+}
+
+
+/*Sección superior (menú, abajo de la cabecera)*/
+.superior__seccion__container{
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /*con esto los textos grandes no se dividen en dos líneas, se ajustan en 1 sola*/
+    overflow: scroll; /*añadimos una barra de deslizamiento*/
+    gap: 15px; /*colocamos el espacimaiento entre items, si usamos MARGIN necesitariamos más de 1 linea de codigo*/
+}
+
+/*Sección de videos*/
+.videos__container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px; /*Esto lo agregue para poner más espacio entre los videos con el rodapie (footer)*/
+}
+
+.videos__item{
+    height: 303px;  /*es lo que hizo la instructora, ajustamos el tamaño de las miniaturas de los videos*/
+    width: 280px;
+    flex-grow: 1;  /*los elementos se ajustaron proporcionalmente al contenedor, llenaron el espacio vacío de la derecha*/
+}
+
+.descripcion-video{  /*a partir de aqui fue el challenge, copié el código*/
+    margin-top: 1rem;
+    display: flex;
+    align-items: start;
+}
+
+.descripcion-video img {
+    margin-right: 1rem; 
+    flex-shrink: 0;  /* PROPIEDAD QUE NO ENSEÑARON, sino hasta el challenge, Evita que la imagen se reduzca */
+}
+
+.detalles__video {
+    flex-direction: column;
+    text-align:left;
+}
+
+.detalles__video h3{
+    margin-bottom: 10px;
+}
+
+
+/*Rodapie (footer)*/
+.rodapie__container{
+    display: flex;
+    /* Estas dos funciones se pueden cambiar por otra que abarca ambas: flex-flow: column wrap;
+    flex-direction: column;
+    flex-wrap: wrap;
+    */
+    flex-flow: column wrap;
+}
+
+
+/*Ajustes responsivos*/
+
+/*---Celulares---*/
+@media (min-width: 834px) {  /* Oculta o muestra ciertos bloques de código cuando la condición es verdadera o se cumple*/
+
+    /*Cabecera*/
+    .cabecera__buscar__item{
+        display: block;
+    
+    }
+
+    /*Rodapie(footer)*/
+    .rodapie__container{
+        justify-content: space-between;
+    }
+
+}
+
+
+/*---Menú lateral para Tablets---*/
+@media (min-width: 835px) {
+
+    .menu__container{
+        position: fixed;  /*para que se quede fija en su posición*/
+        left: 0;  /*sirve para que el contenedor se pegue a la izquierda*/
+        height: auto;
+        width: 74px;  /*ancho del contenedor*/
+        top: 80px; /*sirve para separarlo del logo de AluraPlay*/
+    }
+
+    .menu__lista{
+        display: flex;
+        flex-direction: column; /*establecer que queremos que los elementos se muestren en columna*/
+        justify-content: flex-start; /*para que los items inicien desde arriba de la columna*/
+        padding-top: 15px; /*aumento interno de la parte superior*/
+        gap: 33px; /*separación entre items*/
+    }
+
+}
+
+
+/*---Menú lateral para Desktops(PC)---*/
+@media (min-width: 1440px){
+
+    .menu__container{
+        width: 239px;
+        overflow: scroll;
+        
+    }
+
+    .menu__lista:nth-child(2), /*Colocamos esta subclase con las listas de items nuevamente para que ahora aparezcan*/
+    .menu__lista:nth-child(3),
+    .menu__lista:nth-child(4) {
+        display: flex;  /*Cambiamos el none por flex para que ahora si aparezcan todas las listas*/
+    }
+    /*Aun con estos cambios no aparecen los items ya que en menu_lista (mobiles) hay un height: 100%, por lo que
+    la lista que aparece ahi abarca todo el contenedor, por lo que hicimos lo siguiente: */
+
+    .menu__lista{
+        height: auto; /*Con esto ya púeden aparecen todas las listas, pero para eso agregamos un scroll en .menu_container*/
+        padding: 20px 17px 20px 15px;  /*aumentamos el espacio entre el contenido y el borde de los elementos*/
+        gap: 15px; /*separamos los items entre sí*/
+    }
+
+    .menu__lista:nth-child(3){
+        flex-direction: column-reverse;
+    }
+
+    .menu__itens{
+        flex-direction: row; /*los iconos estan a la par de los textos*/
+        gap: 15px; /*separamos los iconos de los textos*/
+        align-items: center; /*los items (icono y texto) se centran*/
+    }
+
+    .videojuegos{
+        order: 3;
+    }
+
+    .peliculas{
+        order: 2;
+    }
+
+    .premium{
+        order: 1;
+    }
+
+}
